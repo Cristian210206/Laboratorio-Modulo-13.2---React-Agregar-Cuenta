@@ -1,0 +1,37 @@
+.root {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 5px solid #232c3b;
+}
+
+.header-container h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+.saldo-disponible {
+  color: var(--primary_color);
+  font-size: 26px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.saldo-disponible-text {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sub-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 15px;
+}

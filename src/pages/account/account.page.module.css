@@ -1,0 +1,56 @@
+.root {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 5px solid #232c3b;
+}
+
+.selects {
+    justify-items: center;
+    border-bottom: black solid 1px;
+    padding: 40px 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.selects > div {
+  margin-bottom: 20px;
+}
+
+.selects > div > p {
+  text-align: center;
+  font-size: 14px;
+  color: red;
+}
+
+.selects > div > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.selects > div >div > h3 {
+    margin-right: 20px;
+}
+
+.boton {
+    margin: auto;
+}
+
+.selects > div > div > select {
+  font-size: 13px;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.selects > div > div > select > option {
+  font-size: 15px;
+}
