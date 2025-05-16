@@ -4,6 +4,7 @@ import classes from "./account.page.module.css"
 import { useNavigate } from "react-router-dom";
 import { appRoutes } from "@/core/router";
 import { saveAccount } from "./api/account-list.api";
+import { validateAccount } from "./account.page.validator";
 
 export interface Account {
   type: string;
@@ -11,32 +12,22 @@ export interface Account {
 }
 
 export interface Errors {
-  numberErrors: number;
+  succeed: boolean;
   typeError: string;
   nameError: string;
 }
 
 export const AccountPage: React.FC = () => {
   const [account, setAccount] = useState<Account>({type:"",name:""})
-  const [errors, setErrors] = useState<Errors>({numberErrors: 0, typeError: "", nameError: ""})
+  const [errors, setErrors] = useState<Errors>({succeed: true, typeError: "", nameError: ""})
   const navigate = useNavigate()
   const handleOnSaveClick = () => {
-    const errorsTemp:Errors = {numberErrors: 0, typeError: "", nameError: ""}
-
-    if (account.type === "") {
-      errorsTemp.numberErrors++,
-      errorsTemp.typeError = "Se debe introducir el tipo de cuenta";
-    }
-
-    if (account.name === "") {
-      errorsTemp.numberErrors++,
-      errorsTemp.nameError = "Se debe introducir nombre para la cuenta";
-    }
-
-    setErrors(errorsTemp)
-    if (errorsTemp.numberErrors === 0) {
+    const errorsTemp:Errors = validateAccount(account);
+    if (errorsTemp.succeed) {
       saveAccount(account)
       navigate(appRoutes.accountList)
+    } else {
+      setErrors(errorsTemp)
     }
   }
 
@@ -44,11 +35,11 @@ export const AccountPage: React.FC = () => {
     <AppLayout>
       <div className={classes.root}>
         <h1 className={classes.title}>Cuenta Bancaria</h1>
-        <div className={classes.selects}>
+        <form className={classes.selects}>
           <div>
             <div>
-              <h3>Tipo de cuenta:</h3>
-              <select onChange={(e) => setAccount({...account, type: e.target.value})}>
+              <label htmlFor="type">Tipo de cuenta:</label>
+              <select name="type" onChange={(e) => setAccount({...account, type: e.target.value})}>
                 <option value="">Seleccionar</option>
                 <option value="1">Cuenta corriente</option>
                 <option value="2">Ahorro</option>
@@ -59,12 +50,12 @@ export const AccountPage: React.FC = () => {
           </div>
           <div>
             <div>
-              <h3>Alias:</h3>
-              <input type="text" onChange={(e) => setAccount({...account, name: e.target.value})}/>
+              <label htmlFor="name">Alias:</label>
+              <input type="text" name="name" onChange={(e) => setAccount({...account, name: e.target.value})}/>
             </div>
             {errors.nameError !== "" && <p>{errors.nameError}</p>}
           </div>
-        </div>
+        </form>
         <button className={classes.boton} onClick={handleOnSaveClick}>GUARDAR</button>
       </div>
     </AppLayout>
